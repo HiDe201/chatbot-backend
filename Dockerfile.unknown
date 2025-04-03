@@ -1,0 +1,30 @@
+# Use an official Python image
+FROM python:3.11
+
+# Install system dependencies (including PortAudio for PyAudio)
+RUN apt-get update && apt-get install -y portaudio19-dev
+
+# Set the working directory
+WORKDIR /app
+
+# Copy project files
+COPY . .
+
+# Upgrade pip to ensure the latest version
+RUN pip install --no-cache-dir --upgrade pip
+
+# Install dependencies from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install gunicorn
+RUN pip install gunicorn
+
+# Copy the start script into the container
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Expose the port for the app
+EXPOSE 5000  
+
+# Run the start script
+CMD ["/start.sh"]

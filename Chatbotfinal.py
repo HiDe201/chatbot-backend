@@ -13,7 +13,7 @@ if not openai.api_key:
 
 # Flask app setup
 app = Flask(__name__)
-CORS(app)  # Enable CORS for React frontend
+CORS(app, resources={r"/*":{"origins": ["https://chatbot-frontend-gold.vercel.app/"]}})  # Enable CORS for React frontend
 
 # Audio Configuration
 UPLOAD_FOLDER = "uploads"

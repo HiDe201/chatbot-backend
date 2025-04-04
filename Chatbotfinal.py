@@ -30,7 +30,7 @@ def transcribe_audio():
     file.save(file_path)
 
     try:
-            audio_file = open("audio.wav", "rb")
+            audio_file = open(file_path, "rb")
             response = openai.Audio.transcribe(model="whisper-1", file=audio_file)
             transcription = response.get("text", "")
             return jsonify({"transcription": transcription})
